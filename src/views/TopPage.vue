@@ -8,17 +8,19 @@
       <div class="row h-25 pt-3">
         <button class="btn btn-primary btn-lg mx-auto" v-bind:disabled="isLoading" @click="show()">show!</button>
       </div>
+      <search-form />
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import CardInfo from '@/components/CardInfo'
+import CardInfo from '@/components/card/CardInfo'
+import SearchForm from '@/components/SearchForm'
 
 export default {
   name: 'TopPage',
-  components: { CardInfo },
+  components: { SearchForm, CardInfo },
   data: function () {
     return {
       loading: false

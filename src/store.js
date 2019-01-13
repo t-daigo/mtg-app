@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import API from '@/api/api'
+import { FORMAT } from '@/const'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     card: null,
-    jpnCard: null
+    jpnCard: null,
+    gameFormat: FORMAT.STANDARD.param
   },
   mutations: {
     setCardInfo: (state, payload) => {
@@ -15,17 +17,23 @@ export default new Vuex.Store({
     },
     setJpnCardInfo: (state, payload) => {
       state.jpnCard = payload
+    },
+    setFormat: (state, payload) => {
+      state.gameFormat = payload
     }
   },
   actions: {
-    fetchRandomCard: async ({ commit }) => {
+    fetchRandomCard: async ({ commit, state }) => {
       commit('setCardInfo', null)
       commit('setJpnCardInfo', null)
+      const params = {
+        gameFormat: state.gameFormat
+      }
       /**
        * 日本語の存在するカード
        * @type {Object}
        */
-      return API.fetchRandomCard().then(card => {
+      return API.fetchRandomCard(params).then(card => {
         commit('setCardInfo', card)
         // 日本語カードがあればcommit
         const jpnCard = card.foreignNames.find(foreignName => {

@@ -7,8 +7,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import CardViewer from '@/components/CardViewer'
-import LoadingSpinner from '@/components/LoadingSpinner'
+import CardViewer from './CardViewer'
+import LoadingSpinner from '../LoadingSpinner'
 
 export default {
   name: 'showCardPage',

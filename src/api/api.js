@@ -7,9 +7,9 @@ export default {
    * ランダムなカードの情報を10枚返す
    * @returns {Promise<Object>}
    */
-  fetchRandomCard: async () => {
+  fetchRandomCard: async (params) => {
     return mtg.card.where({
-      gameFormat: 'Standard',
+      ...params,
       pageSize: 10,
       random: true
     }).then(cards => {
