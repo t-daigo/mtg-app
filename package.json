@@ -9,6 +9,11 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "bootstrap": "^4.2.1",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.11",
+    "mtgsdk": "^0.4.2",
+    "popper.js": "^1.14.6",
     "vue": "^2.5.21",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
