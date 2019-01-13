@@ -1,5 +1,5 @@
 <template>
-  <div class="jumbotron vh-100">
+  <div class="vh-100">
     <div class="container-fluid">
       <div class="row h-25 pt-3">
         <h1 class="mx-auto">MtG 今日の一枚</h1>
@@ -8,7 +8,8 @@
       <div class="row h-25 pt-3">
         <button class="btn btn-primary btn-lg mx-auto" v-bind:disabled="isLoading" @click="show()">show!</button>
       </div>
-      <search-form />
+      <twitter-button/>
+      <search-form/>
     </div>
   </div>
 </template>
@@ -17,10 +18,11 @@
 import { mapGetters, mapActions } from 'vuex'
 import CardInfo from '@/components/card/CardInfo'
 import SearchForm from '@/components/SearchForm'
+import TwitterButton from '@/components/twitter/TwitterButton'
 
 export default {
   name: 'TopPage',
-  components: { SearchForm, CardInfo },
+  components: { TwitterButton, SearchForm, CardInfo },
   data: function () {
     return {
       loading: false

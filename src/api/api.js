@@ -13,15 +13,17 @@ export default {
       pageSize: 10,
       random: true
     }).then(cards => {
-      // 基本土地でないカード1つを抽出
+      if (cards.length === 0) {
+        throw new Error('検索結果が0件です')
+      }
+      // 基本土地でなく、画像が存在すカード1つを抽出
       const shuffled = shuffle(cards)
       return shuffled.find(card => {
         // 基本土地以外
-        return !card.supertypes.includes('Basic')
+        return !card.supertypes.includes('Basic') && card.imageUrl
       })
     }).catch(err => {
       // APIエラー時の処理
-      alert('APIエラー')
       console.error(err)
       return null
     })

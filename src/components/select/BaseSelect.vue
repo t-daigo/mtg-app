@@ -22,9 +22,6 @@ export default {
     contents: {
       type: Array,
       required: true
-    },
-    actionName: {
-      type: String
     }
   },
   methods: {

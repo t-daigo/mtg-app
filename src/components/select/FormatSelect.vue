@@ -14,14 +14,7 @@ export default {
   data: function () {
     return {
       selectorId: 'format-select',
-      contents: [
-        FORMAT.STANDARD,
-        FORMAT.MODERN,
-        FORMAT.LEGACY,
-        FORMAT.VINTAGE,
-        FORMAT.COMMANDER
-      ],
-      actionName: 'selectFormat'
+      contents: Object.values(FORMAT)
     }
   },
   methods: {

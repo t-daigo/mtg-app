@@ -9,7 +9,10 @@ export default new Vuex.Store({
   state: {
     card: null,
     jpnCard: null,
-    gameFormat: FORMAT.STANDARD.param
+    gameFormat: FORMAT.STANDARD.param,
+    types: '',
+    colors: [],
+    isColorSearchAnd: false
   },
   mutations: {
     setCardInfo: (state, payload) => {
@@ -20,14 +23,31 @@ export default new Vuex.Store({
     },
     setFormat: (state, payload) => {
       state.gameFormat = payload
+    },
+    setTypes: (state, payload) => {
+      state.types = payload
+    },
+    setColors: (state, payload) => {
+      state.colors = [...state.colors, payload]
+      console.log(state.colors)
+    },
+    removeColors: (state, payload) => {
+      state.colors = state.colors.filter(color => color !== payload)
+    },
+    setIsColorSearchAnd: (state, payload) => {
+      state.isColorSearchAnd = payload
     }
   },
   actions: {
     fetchRandomCard: async ({ commit, state }) => {
       commit('setCardInfo', null)
       commit('setJpnCardInfo', null)
+      // GETパラメータ組み立て
+      let colors = state.isColorSearchAnd ? state.colors.join() : state.colors.join('|')
       const params = {
-        gameFormat: state.gameFormat
+        gameFormat: state.gameFormat,
+        types: state.types,
+        colors: colors
       }
       /**
        * 日本語の存在するカード
@@ -40,7 +60,16 @@ export default new Vuex.Store({
           return foreignName.language === 'Japanese'
         })
         commit('setJpnCardInfo', jpnCard)
+      }).catch(() => {
+        alert('APIエラー')
       })
+    },
+    buildColorsParam: ({ commit, state }, color) => {
+      if (state.colors.includes(color)) {
+        commit('removeColors', color)
+      } else {
+        commit('setColors', color)
+      }
     }
   },
   getters: {
