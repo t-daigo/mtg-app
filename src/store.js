@@ -29,7 +29,6 @@ export default new Vuex.Store({
     },
     setColors: (state, payload) => {
       state.colors = [...state.colors, payload]
-      console.log(state.colors)
     },
     removeColors: (state, payload) => {
       state.colors = state.colors.filter(color => color !== payload)
